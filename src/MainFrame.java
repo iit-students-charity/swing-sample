@@ -2,6 +2,7 @@ package src;
 
 import javax.swing.JFrame;
 import java.awt.Container;
+import src.PanelBase;
 import src.FirstPanel;
 // import src.SecondPanel;
 // import src.ThirdPanel;
@@ -10,7 +11,7 @@ import src.FirstPanel;
 
 public class MainFrame {
     public void showGUI() {
-        JFrame frame = new JFrame("Swing components example");
+        JFrame frame = new JFrame("Swing sample");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container contentPane = frame.getContentPane();
@@ -26,7 +27,6 @@ public class MainFrame {
     }
 
     public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame();
-        mainFrame.showGUI();
+        new MainFrame().showGUI();
     }
 }
