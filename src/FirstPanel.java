@@ -4,25 +4,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FirstPanel extends PanelBase {
-    private JPanel panel;
     private JTextField textField;
     private JButton button;
     private JComboBox comboBox;
-
-    public FirstPanel() {
-        panel = new JPanel(new GridBagLayout());
-    }
-
-    public JPanel getPanel() {
-        return panel;
-    }
 
     public FirstPanel configurePanel() {
         textField = new JTextField(20);

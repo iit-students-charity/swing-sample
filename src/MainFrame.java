@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import java.awt.Container;
 import src.PanelBase;
 import src.FirstPanel;
-// import src.SecondPanel;
+import src.SecondPanel;
 // import src.ThirdPanel;
 // import src.FourthPanel;
 // import src.FifthPanel;
@@ -16,10 +16,10 @@ public class MainFrame {
 
         Container contentPane = frame.getContentPane();
         contentPane.add(new FirstPanel().configurePanel().getPanel());
-        // contentPane.add(new SecondPanel().getPanel());
-        // contentPane.add(new ThirdPanel().getPanel());
-        // contentPane.add(new FourthPanel().getPanel());
-        // contentPane.add(new FifthPanel().getPanel());
+        // contentPane.add(new SecondPanel().configurePanel().getPanel());
+        // contentPane.add(new ThirdPanel().configurePanel().getPanel());
+        // contentPane.add(new FourthPanel().configurePanel().getPanel());
+        // contentPane.add(new FifthPanel().configurePanel().getPanel());
 
         frame.pack();
         frame.setLocationRelativeTo(null);
