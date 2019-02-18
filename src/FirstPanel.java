@@ -11,12 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FirstPanel extends PanelBase {
-    private JPanel panel = new JPanel(new GridBagLayout());
-    private JTextField textField = new JTextField(20);
-    private JButton button = new JButton("Send");
-    private JComboBox comboBox = new JComboBox();
+    private JPanel panel;
+    private JTextField textField;
+    private JButton button;
+    private JComboBox comboBox;
+
+    public FirstPanel() {
+        panel = new JPanel(new GridBagLayout());
+    }
 
     public JPanel getPanel() {
+        return panel;
+    }
+
+    public FirstPanel configurePanel() {
+        textField = new JTextField(20);
+        button = new JButton("Send");
+        comboBox = new JComboBox();
+
         GridBagConstraints constraints = getDefaultConstraits();
         panel.add(textField, constraints);
 
@@ -28,8 +40,7 @@ public class FirstPanel extends PanelBase {
         constraints.gridy++;
         comboBox.setPreferredSize(new Dimension(245, 20));
         panel.add(comboBox, constraints);
-
-        return panel;
+        return this;
     }
 
     private ActionListener getListener() {

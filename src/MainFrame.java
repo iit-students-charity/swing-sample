@@ -15,7 +15,7 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container contentPane = frame.getContentPane();
-        contentPane.add(new FirstPanel().getPanel());
+        contentPane.add(new FirstPanel().configurePanel().getPanel());
         // contentPane.add(new SecondPanel().getPanel());
         // contentPane.add(new ThirdPanel().getPanel());
         // contentPane.add(new FourthPanel().getPanel());
