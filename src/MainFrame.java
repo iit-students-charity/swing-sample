@@ -16,7 +16,7 @@ public class MainFrame {
 
         Container contentPane = frame.getContentPane();
         contentPane.add(new FirstPanel().configurePanel().getPanel());
-        // contentPane.add(new SecondPanel().configurePanel().getPanel());
+        contentPane.add(new SecondPanel().configurePanel().getPanel());
         // contentPane.add(new ThirdPanel().configurePanel().getPanel());
         // contentPane.add(new FourthPanel().configurePanel().getPanel());
         // contentPane.add(new FifthPanel().configurePanel().getPanel());

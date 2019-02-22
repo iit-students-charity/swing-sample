@@ -23,7 +23,7 @@ public class FirstPanel extends PanelBase {
         panel.add(textField, constraints);
 
         constraints.gridx++;
-        button.addActionListener(getListener());
+        button.addActionListener(addListener());
         panel.add(button, constraints);
 
         constraints.gridx--;
@@ -33,7 +33,7 @@ public class FirstPanel extends PanelBase {
         return this;
     }
 
-    private ActionListener getListener() {
+    private ActionListener addListener() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
