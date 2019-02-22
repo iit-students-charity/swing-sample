@@ -2,6 +2,7 @@ package src;
 
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
