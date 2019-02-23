@@ -13,7 +13,7 @@ public class SecondPanel extends PanelBase {
     private JButton button;
     private JButton swapButton;
 
-    public SecondPanel configurePanel() {
+    public SecondPanel() {
         textField = new JTextField(20);
         button = new JButton("Take text");
         swapButton = new JButton("Swap");
@@ -29,7 +29,6 @@ public class SecondPanel extends PanelBase {
         constraints.gridy++;
         swapButton.addActionListener(addSwapButtonListener());
         panel.add(swapButton, constraints);
-        return this;
     }
 
     private ActionListener addButtonListener() {

@@ -15,7 +15,7 @@ public class FirstPanel extends PanelBase {
     private JButton button;
     private JComboBox comboBox;
 
-    public FirstPanel configurePanel() {
+    public FirstPanel() {
         textField = new JTextField(20);
         button = new JButton("Send");
         comboBox = new JComboBox();
@@ -31,7 +31,6 @@ public class FirstPanel extends PanelBase {
         constraints.gridy++;
         comboBox.setPreferredSize(new Dimension(245, 20));
         panel.add(comboBox, constraints);
-        return this;
     }
 
     private ActionListener addListener() {
