@@ -24,7 +24,7 @@ public class PanelBase {
 
     public GridBagConstraints getDefaultConstraits() {
         GridBagConstraints constraints = new GridBagConstraints();
-        // constraints.anchor = GridBagConstraints.WEST;
+        constraints.anchor = GridBagConstraints.NORTH;
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.gridx = 0;
         constraints.gridy = 0;

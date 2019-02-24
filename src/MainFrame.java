@@ -17,11 +17,11 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container contentPane = frame.getContentPane();
-        // contentPane.add(new FirstPanel().getPanel(), BorderLayout.CENTER);
-        // contentPane.add(new SecondPanel().getPanel(), BorderLayout.NORTH);
-        // contentPane.add(new ThirdPanel().getPanel(), BorderLayout.SOUTH);
-        // contentPane.add(new FourthPanel().getPanel(), BorderLayout.PAGE_END);
-        contentPane.add(new FifthPanel().getPanel(), BorderLayout.PAGE_END);
+        contentPane.add(new FirstPanel().getPanel(), BorderLayout.NORTH);
+        contentPane.add(new SecondPanel().getPanel(), BorderLayout.CENTER);
+        contentPane.add(new ThirdPanel().getPanel(), BorderLayout.SOUTH);
+        contentPane.add(new FourthPanel().getPanel(), BorderLayout.WEST);
+        contentPane.add(new FifthPanel().getPanel(), BorderLayout.EAST);
 
         frame.pack();
         frame.setLocationRelativeTo(null);

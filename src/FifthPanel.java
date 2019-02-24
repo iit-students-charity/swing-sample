@@ -32,6 +32,7 @@ public class FifthPanel extends PanelBase {
 
         GridBagConstraints constraints = getDefaultConstraits();
         constraints.gridwidth = 3;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         panel.add(textField, constraints);
 
         constraints.gridwidth = 1;
@@ -40,21 +41,24 @@ public class FifthPanel extends PanelBase {
         panel.add(button, constraints);
 
         constraints.gridx = 0;
-        constraints.gridy++;
-        constraints.gridwidth = 4;
-        // constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridy = 1;
+        constraints.gridwidth = 5;
+        constraints.anchor = GridBagConstraints.CENTER;
         String[] columnNames = { "Left", "Right" };
         model.setColumnIdentifiers(columnNames);
         table.setModel(model);
         scrollPane.setPreferredSize(new Dimension(245, 200));
         panel.add(scrollPane, constraints);
 
-        constraints.gridy++;
+        constraints.gridy = 2;
         constraints.gridx = 0;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.VERTICAL;
         toRightButton.addActionListener(addToRightButtonListener());
         panel.add(toRightButton, constraints);
 
-        constraints.gridx = 2;
+        constraints.gridx = 4;
+        constraints.gridwidth = 2;
         toLeftButton.addActionListener(addToLeftButtonListener());
         panel.add(toLeftButton, constraints);
     }

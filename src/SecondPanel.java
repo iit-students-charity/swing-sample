@@ -19,14 +19,16 @@ public class SecondPanel extends PanelBase {
         swapButton = new JButton("Swap");
 
         GridBagConstraints constraints = getDefaultConstraits();
-        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         panel.add(textField, constraints);
 
-        constraints.gridy++;
+        constraints.gridwidth = 1;
+        constraints.gridy = 1;
         button.addActionListener(addButtonListener());
         panel.add(button, constraints);
 
-        constraints.gridy++;
+        constraints.gridx = 1;
         swapButton.addActionListener(addSwapButtonListener());
         panel.add(swapButton, constraints);
     }

@@ -27,17 +27,17 @@ public class FourthPanel extends PanelBase {
         GridBagConstraints constraints = getDefaultConstraits();
         panel.add(textField, constraints);
 
-        constraints.gridx++;
+        constraints.gridx = 1;
         button.addActionListener(addListener());
         panel.add(button, constraints);
 
-        constraints.insets = new Insets(2, 20, 2, 2);
-        constraints.gridx--;
-        constraints.gridy++;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         panel.add(fooRadioButton, constraints);
-        constraints.gridy++;
+        constraints.gridy = 2;
         panel.add(barRadioButton, constraints);
-        constraints.gridy++;
+        constraints.gridy = 3;
         panel.add(bazRadioButton, constraints);
     }
 

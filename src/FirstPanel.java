@@ -23,12 +23,14 @@ public class FirstPanel extends PanelBase {
         GridBagConstraints constraints = getDefaultConstraits();
         panel.add(textField, constraints);
 
-        constraints.gridx++;
+        constraints.gridx = 1;
         button.addActionListener(addListener());
         panel.add(button, constraints);
 
-        constraints.gridx--;
-        constraints.gridy++;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         comboBox.setPreferredSize(new Dimension(245, 20));
         panel.add(comboBox, constraints);
     }
