@@ -4,18 +4,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
-import java.awt.GridBagConstraints;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
-public class FirstPanel extends PanelBase {
+public class FirstPanel {
+    private JPanel panel;
     private JTextField textField;
     private JButton button;
     private JComboBox comboBox;
 
     public FirstPanel() {
+        panel = new JPanel(new GridBagLayout());
         textField = new JTextField(20);
         button = new JButton("Send");
         comboBox = new JComboBox();
@@ -35,6 +40,19 @@ public class FirstPanel extends PanelBase {
         panel.add(comboBox, constraints);
     }
 
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    private GridBagConstraints getDefaultConstraits() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        return constraints;
+    }
+
     private ActionListener addListener() {
         return new ActionListener() {
             @Override
@@ -51,5 +69,9 @@ public class FirstPanel extends PanelBase {
                 textField.setText("");
             }
         };
+    }
+
+    private void alert(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 }

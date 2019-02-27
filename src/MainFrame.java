@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
-import src.PanelBase;
 import src.Separator;
 import src.FirstPanel;
 import src.SecondPanel;

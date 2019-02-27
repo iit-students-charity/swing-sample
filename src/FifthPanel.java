@@ -2,6 +2,8 @@ package src;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -10,8 +12,11 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-public class FifthPanel extends PanelBase {
+public class FifthPanel {
+    private JPanel panel;
     private JTextField textField;
     private JButton button;
     private JButton toRightButton;
@@ -21,6 +26,7 @@ public class FifthPanel extends PanelBase {
     private JScrollPane scrollPane;
 
     public FifthPanel() {
+        panel = new JPanel(new GridBagLayout());
         textField = new JTextField(20);
         button = new JButton("Add");
         toRightButton = new JButton(">");
@@ -60,6 +66,19 @@ public class FifthPanel extends PanelBase {
         constraints.gridwidth = 2;
         toLeftButton.addActionListener(addToLeftButtonListener());
         panel.add(toLeftButton, constraints);
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    private GridBagConstraints getDefaultConstraits() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        return constraints;
     }
 
     private DefaultTableModel getModel() {
@@ -113,5 +132,9 @@ public class FifthPanel extends PanelBase {
                 }
             }
         };
+    }
+
+    private void alert(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 }

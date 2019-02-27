@@ -4,12 +4,17 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-public class ThirdPanel extends PanelBase {
+public class ThirdPanel {
+    private JPanel panel;
     private JTextField textField;
     private JButton button;
     private JRadioButton fooRadioButton;
@@ -17,6 +22,7 @@ public class ThirdPanel extends PanelBase {
     private JRadioButton bazRadioButton;
 
     public ThirdPanel() {
+        panel = new JPanel(new GridBagLayout());
         textField = new JTextField(20);
         button = new JButton("Activate");
         fooRadioButton = new JRadioButton("foo");
@@ -44,6 +50,19 @@ public class ThirdPanel extends PanelBase {
         group.add(bazRadioButton);
     }
 
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    private GridBagConstraints getDefaultConstraits() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        return constraints;
+    }
+
     private ActionListener addListener() {
         return new ActionListener() {
             @Override
@@ -59,5 +78,9 @@ public class ThirdPanel extends PanelBase {
                 alert("There is no such radio button!");
             }
         };
+    }
+
+    private void alert(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 }
