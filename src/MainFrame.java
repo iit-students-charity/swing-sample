@@ -2,7 +2,6 @@ package src;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 
 import src.CircleLayout;
 import src.Separator;
@@ -18,7 +17,7 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel contentPane = new JPanel();
-        contentPane.setLayout(new CircleLayout(0.75));
+        contentPane.setLayout(new CircleLayout());
         frame.setContentPane(contentPane);
 
         contentPane.add(new FirstPanel().getPanel());
