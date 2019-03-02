@@ -2,7 +2,7 @@ package src;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
@@ -16,17 +16,17 @@ public class FourthPanel {
     private JPanel panel;
     private JTextField textField;
     private JButton button;
-    private JRadioButton fooRadioButton;
-    private JRadioButton barRadioButton;
-    private JRadioButton bazRadioButton;
+    private JCheckBox fooCheckBox;
+    private JCheckBox barCheckBox;
+    private JCheckBox bazCheckBox;
 
     public FourthPanel() {
         panel = new JPanel(new GridBagLayout());
         textField = new JTextField(20);
         button = new JButton("Activate");
-        fooRadioButton = new JRadioButton("foo");
-        barRadioButton = new JRadioButton("bar");
-        bazRadioButton = new JRadioButton("baz");
+        fooCheckBox = new JCheckBox("foo");
+        barCheckBox = new JCheckBox("bar");
+        bazCheckBox = new JCheckBox("baz");
 
         GridBagConstraints constraints = getDefaultConstraits();
         panel.add(textField, constraints);
@@ -38,11 +38,11 @@ public class FourthPanel {
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(fooRadioButton, constraints);
+        panel.add(fooCheckBox, constraints);
         constraints.gridy = 2;
-        panel.add(barRadioButton, constraints);
+        panel.add(barCheckBox, constraints);
         constraints.gridy = 3;
-        panel.add(bazRadioButton, constraints);
+        panel.add(bazCheckBox, constraints);
     }
 
     public JPanel getPanel() {
@@ -64,12 +64,12 @@ public class FourthPanel {
             public void actionPerformed(ActionEvent e) {
                 String names = textField.getText();
                 String[] namesArray = names.split("\\s+");
-                JRadioButton[] radioButtons = {fooRadioButton, barRadioButton, bazRadioButton};
+                JCheckBox[] checkBoxes = {fooCheckBox, barCheckBox, bazCheckBox};
                 for (String name : namesArray) {
                     boolean found = false;
-                    for (JRadioButton radioButton : radioButtons) {
-                        if (radioButton.getText().equals(name)) {
-                            radioButton.setSelected(true);
+                    for (JCheckBox checkBox : checkBoxes) {
+                        if (checkBox.getText().equals(name)) {
+                            checkBox.setSelected(!checkBox.isSelected());
                             found = true;
                             break;
                         }
