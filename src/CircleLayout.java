@@ -1,171 +1,102 @@
 package src;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.util.ArrayList;
 
-public class CircleLayout implements LayoutManager {
-    private int vgap;
-    private int minWidth = 0, minHeight = 0;
-    private int preferredWidth = 0, preferredHeight = 0;
-    private boolean sizeUnknown = true;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+class CircleLayout implements LayoutManager {
+    private double radiusFactor;
+
+    public CircleLayout(double radiusFactor) {
+        this.radiusFactor = radiusFactor;
+    }
 
     public CircleLayout() {
-        this(5);
+        this(0.75);
     }
 
-    public CircleLayout(int v) {
-        vgap = v;
-    }
-
-    /* Required by LayoutManager. */
-    public void addLayoutComponent(String name, Component comp) {
-    }
-
-    /* Required by LayoutManager. */
-    public void removeLayoutComponent(Component comp) {
-    }
-
-    private void setSizes(Container parent) {
-        int nComps = parent.getComponentCount();
-        Dimension d = null;
-
-        //Reset preferred/minimum width and height.
-        preferredWidth = 0;
-        preferredHeight = 0;
-        minWidth = 0;
-        minHeight = 0;
-
-        for (int i = 0; i < nComps; i++) {
-            Component c = parent.getComponent(i);
-            if (c.isVisible()) {
-                d = c.getPreferredSize();
-
-                if (i > 0) {
-                    preferredWidth += d.width/2;
-                    preferredHeight += vgap;
-                } else {
-                    preferredWidth = d.width;
-                }
-                preferredHeight += d.height;
-
-                minWidth = Math.max(c.getMinimumSize().width,
-                                    minWidth);
-                minHeight = preferredHeight;
-            }
-        }
-    }
-
-
-    /* Required by LayoutManager. */
-    public Dimension preferredLayoutSize(Container parent) {
-        Dimension dim = new Dimension(0, 0);
-        int nComps = parent.getComponentCount();
-
-        setSizes(parent);
-
-        //Always add the container's insets!
-        Insets insets = parent.getInsets();
-        dim.width = preferredWidth
-                    + insets.left + insets.right;
-        dim.height = preferredHeight
-                     + insets.top + insets.bottom;
-
-        sizeUnknown = false;
-
-        return dim;
-    }
-
-    /* Required by LayoutManager. */
-    public Dimension minimumLayoutSize(Container parent) {
-        Dimension dim = new Dimension(0, 0);
-        int nComps = parent.getComponentCount();
-
-        //Always add the container's insets!
-        Insets insets = parent.getInsets();
-        dim.width = minWidth
-                    + insets.left + insets.right;
-        dim.height = minHeight
-                     + insets.top + insets.bottom;
-
-        sizeUnknown = false;
-
-        return dim;
-    }
-
-    /* Required by LayoutManager. */
-    /*
-     * This is called when the panel is first displayed,
-     * and every time its size changes.
-     * Note: You CAN'T assume preferredLayoutSize or
-     * minimumLayoutSize will be called -- in the case
-     * of applets, at least, they probably won't be.
-     */
     public void layoutContainer(Container parent) {
-        Insets insets = parent.getInsets();
-        int maxWidth = parent.getWidth() - (insets.left + insets.right);
-        int maxHeight = parent.getHeight() - (insets.top + insets.bottom);
-        int nComps = parent.getComponentCount();
-        int previousWidth = 0, previousHeight = 0;
-        int x = 0, y = insets.top;
-        int rowh = 0, start = 0;
-        int xFudge = 0, yFudge = 0;
-        boolean oneColumn = false;
+        Component component;
+        Dimension preferedSize;
+        int componentCount = parent.getComponentCount();
+        int centerX = getCenterX(parent);
+        int centerY = getCenterY(parent);
 
-        // Go through the components' sizes, if neither
-        // preferredLayoutSize nor minimumLayoutSize has
-        // been called.
-        if (sizeUnknown) {
-            setSizes(parent);
-        }
-
-        if (maxWidth <= minWidth) {
-            oneColumn = true;
-        }
-
-        if (maxWidth != preferredWidth) {
-            xFudge = (maxWidth - preferredWidth)/(nComps - 1);
-        }
-
-        if (maxHeight > preferredHeight) {
-            yFudge = (maxHeight - preferredHeight)/(nComps - 1);
-        }
-
-        for (int i = 0 ; i < nComps ; i++) {
-            Component c = parent.getComponent(i);
-            if (c.isVisible()) {
-                Dimension d = c.getPreferredSize();
-
-                // Increase x and y, if appropriate
-                if (i > 0) {
-                    if (!oneColumn) {
-                        x += previousWidth/2 + xFudge;
-                    }
-                    y += previousHeight + vgap + yFudge;
-                }
-
-                // // If x is too large,
-                // if ((!oneColumn) && (x + d.width) > (parent.getWidth() - insets.right)) {
-                //     // reduce x to a reasonable number.
-                //     x = parent.getWidth()
-                //         - insets.bottom - d.width;
-                // }
-
-                // // If y is too large,
-                // if ((y + d.height) > (parent.getHeight() - insets.bottom)) {
-                //     // do nothing.
-                //     // Another choice would be to do what we do to x.
-                // }
-
-                // Set the component's size and position.
-                c.setBounds(x, y, d.width, d.height);
-
-                previousWidth = d.width;
-                previousHeight = d.height;
+        if (componentCount == 1) {
+            component = parent.getComponent(0);
+            preferedSize = component.getPreferredSize();
+            component.setBounds(centerX, centerY, preferedSize.width, preferedSize.height);
+        } else {
+            double radius = getRadius(parent);
+            for (int i = 0; i < componentCount; i++) {
+                component = parent.getComponent(i);
+                preferedSize = component.getPreferredSize();
+                component.setBounds(getComponentX(componentCount, i, centerX, radius),
+                                    getComponentY(componentCount, i, centerY, radius),
+                                    preferedSize.width,
+                                    preferedSize.height);
             }
         }
+    }
+
+    private int getComponentX(int partsCount, int componentNumber, int centerX, double radius) {
+        return (int) (radius * Math.cos(2 * componentNumber * Math.PI / partsCount)) + centerX;
+    }
+
+    private int getComponentY(int partsCount, int componentNumber, int centerY, double radius) {
+        return (int) (radius * Math.sin(2 * componentNumber * Math.PI / partsCount)) + centerY;
+    }
+
+    private int getCenterX(Container parent) {
+        Insets insets = parent.getInsets();
+        return (int) (parent.getSize().width - (insets.left + insets.right)) / 2;
+    }
+
+    private int getCenterY(Container parent) {
+        Insets insets = parent.getInsets();
+        return (int) (parent.getSize().height - (insets.top + insets.bottom)) / 2;
+    }
+
+
+    private double getRadius(Container parent) {
+        Insets insets = parent.getInsets();
+        double parentWidth = parent.getSize().width;
+        double parentHeight = parent.getSize().height;
+        return (Math.min(parentWidth - (insets.left + insets.right),
+                         parentHeight - (insets.top + insets.bottom)))
+                / 2 * radiusFactor;
+    }
+
+    public Double getRadiusFactor() {
+        return radiusFactor;
+    }
+
+    public void setRadiusFactor(double radiusFactor) {
+        this.radiusFactor = radiusFactor;
+    }
+
+    public Dimension preferredLayoutSize(Container target) {
+        return target.getSize();
+    }
+
+    public Dimension minimumLayoutSize(Container target) {
+        return target.getSize();
+    }
+
+    public void addLayoutComponent(String name, Component component) {
+    }
+
+    public void removeLayoutComponent(Component component) {
     }
 
     public String toString() {
-        String str = "";
-        return getClass().getName() + "[vgap=" + vgap + str + "]";
+        return this.getClass().getName() + "[radiusFactor = " + radiusFactor + "]";
     }
 }

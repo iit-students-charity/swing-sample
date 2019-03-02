@@ -18,7 +18,8 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel contentPane = new JPanel();
-        contentPane.setLayout(new CircleLayout());
+        contentPane.setLayout(new CircleLayout(0.75));
+        frame.setContentPane(contentPane);
 
         contentPane.add(new FirstPanel().getPanel());
         contentPane.add(new SecondPanel().getPanel());
@@ -26,8 +27,7 @@ public class MainFrame {
         contentPane.add(new FourthPanel().getPanel());
         contentPane.add(new FifthPanel().getPanel());
 
-        frame.setContentPane(contentPane);
-        frame.pack();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
