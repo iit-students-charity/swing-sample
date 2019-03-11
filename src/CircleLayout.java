@@ -1,6 +1,5 @@
 package src;
 
-import javax.swing.*;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -31,14 +30,16 @@ class CircleLayout implements LayoutManager {
             component = parent.getComponent(0);
             preferredSize = component.getPreferredSize();
             component.setBounds(centerX, centerY, preferredSize.width, preferredSize.height);
-        } else {
+        }
+        else {
             double radius = getRadius(parent);
-            for (int i = 0; i < componentCount; i++) {
-                component = parent.getComponent(i);
+            for (int componentNumber = 0; componentNumber < componentCount; componentNumber++) {
+                component = parent.getComponent(componentNumber);
                 preferredSize = component.getPreferredSize();
-                // ?
-                component.setBounds(getComponentX(componentCount, i, centerX, radius) - preferredSize.width / 2,
-                                    getComponentY(componentCount, i, centerY, radius) - preferredSize.height / 2,
+                int componentX = getComponentX(componentCount, componentNumber, centerX, radius);
+                int componentY = getComponentY(componentCount, componentNumber, centerY, radius);
+                component.setBounds(componentX - preferredSize.width / 2,
+                                    componentY - preferredSize.height / 2,
                                     preferredSize.width,
                                     preferredSize.height);
             }
@@ -62,7 +63,6 @@ class CircleLayout implements LayoutManager {
         Insets insets = parent.getInsets();
         return ((int) (parent.getSize().height - (insets.top + insets.bottom)) / 2) + insets.left;
     }
-
 
     private double getRadius(Container parent) {
         Insets insets = parent.getInsets();
@@ -110,7 +110,6 @@ class CircleLayout implements LayoutManager {
         }
         sizeUnknown = false;
     }
-
 
     public void addLayoutComponent(String name, Component component) {
     }

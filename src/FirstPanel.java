@@ -58,8 +58,8 @@ public class FirstPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newItem = textField.getText();
-                for (int i = 0; i < comboBox.getItemCount(); i++) {
-                    String item = comboBox.getItemAt(i).toString();
+                for (int itemNumber = 0; itemNumber < comboBox.getItemCount(); itemNumber++) {
+                    String item = comboBox.getItemAt(itemNumber).toString();
                     if (item.equals(newItem)) {
                         alert("This item already exists!");
                         return;
