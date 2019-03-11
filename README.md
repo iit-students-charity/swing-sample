@@ -54,3 +54,9 @@ QTableWidget
 # Дополнительное задание:
 
 Написать LayoutManager который будет распологать все элементы по кругу. **На ветке circle-layout**.
+
+# Запуск
+
+```bash
+javac src/MainFrame.java && java src.Main
+```
